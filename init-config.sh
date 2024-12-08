@@ -1,22 +1,8 @@
 #!/bin/bash
 
-# Function to check if a package is installed, and install it if not
-install_if_missing() {
-    local package=$1
-    if ! dpkg -l | grep -qw "$package"; then
-        echo "Installing $package..."
-        sudo apt update
-        sudo apt install -y "$package"
-    else
-        echo "$package is already installed."
-    fi
-}
-
-# Install required packages
-install_if_missing git
-install_if_missing zsh
-install_if_missing vim
-install_if_missing bat
+echo "Installing missing packages..."
+sudo apt update
+sudo apt install -y git zsh vim bat
 
 # Clone the bare repository
 git clone --bare git@github.com:Ik-12/dotfiles.git $HOME/.cfg 
