@@ -34,3 +34,6 @@ if ! git --git-dir=$GIT_DIR --work-tree=$WORK_TREE checkout; then
 fi
 
 echo "Dotfiles repository successfully checked out."
+echo
+echo "After testing zsh configuration works, change login shell using following command:"
+echo 'sudo chsh -s $(which zsh) $(whoami)'
