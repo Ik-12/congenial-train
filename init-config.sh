@@ -5,7 +5,10 @@ sudo apt update
 sudo apt install -y git zsh vim bat
 
 # Clone the bare repository
-git clone --bare git@github.com:Ik-12/dotfiles.git $HOME/.cfg 
+if ! git clone --bare git@github.com:Ik-12/dotfiles.git $HOME/.cfg; then
+    echo "Error: Failed to clone the repository. Make sure ssh-agent forwarding if working."
+    exit 1
+fi
 
 # Define variables for the repository and work-tree
 GIT_DIR="$HOME/.cfg"
