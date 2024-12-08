@@ -23,7 +23,7 @@ if ! git --git-dir=$GIT_DIR --work-tree=$WORK_TREE checkout; then
     echo "Conflict detected. Renaming existing files to '-bak'..."
 
     # Loop through the conflicting files and rename them
-    conflicted_files=$(git --git-dir=$GIT_DIR --work-tree=$WORK_TREE checkout 2>&1 | egrep '^\s+')
+    conflicted_files=$(git --git-dir=$GIT_DIR --work-tree=$WORK_TREE checkout 2>&1 | egrep '^\s+' | awk -F/ '{print $1}' | uniq)
     for file in $conflicted_files; do
         echo "Renaming $file to $file-bak"
         mv "$HOME/$file" "$HOME/${file}-bak"
