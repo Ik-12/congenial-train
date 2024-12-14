@@ -1,12 +1,22 @@
 #!/bin/bash
 
-echo "Installing missing packages..."
-sudo apt update
-sudo apt install -y git zsh vim bat
+required_pkgs="git zsh vim bat"
+
+if (($(apt list $required_pkgs 2>/dev/null | grep -c -v '\[installed\]') > 1)); then
+    echo "Installing missing packages..."
+    sudo apt update
+    sudo apt install -y $required_pkgs
+fi
+
+# fzf version for Debian 12 is outdated, install directly from github
+if ! type fzf > /dev/null; then
+    git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+    ~/.fzf/install --no-update-rc --completion --key-bindings --no-bash --no-fish
+fi
 
 # Clone the bare repository
 if ! git clone --bare git@github.com:Ik-12/dotfiles.git $HOME/.cfg; then
-    echo "Error: Failed to clone the repository. Make sure ssh-agent forwarding if working."
+    echo "Error: Failed to clone the repository. Make sure ssh-agent forwarding is working."
     exit 1
 fi
 
