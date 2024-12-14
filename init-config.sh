@@ -4,12 +4,24 @@ required_pkgs="git zsh vim bat"
 
 if (($(apt list $required_pkgs 2>/dev/null | grep -c -v '\[installed\]') > 1)); then
     echo "Installing missing packages..."
-    sudo apt update
-    sudo apt install -y $required_pkgs
+    cmd="apt install -y $required_pkgs"
+
+    if (($EUID == 0)); then
+        apt update
+        $cmd
+    else
+        if type sudo 2> /dev/null; then
+            sudo apt update
+            sudo $cmd
+        else
+            echo "Error: sudo is not installed. Install it or install the following required packages as root:"
+            echo "apt update &&" $cmd
+        fi
+    fi
 fi
 
 # fzf version for Debian 12 is outdated, install directly from github
-if ! type fzf > /dev/null; then
+if ! type fzf 2> /dev/null; then
     git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
     ~/.fzf/install --no-update-rc --completion --key-bindings --no-bash --no-fish
 fi
