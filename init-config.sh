@@ -55,7 +55,8 @@ if ! git --git-dir=$GIT_DIR --work-tree=$WORK_TREE checkout; then
     git --git-dir=$GIT_DIR --work-tree=$WORK_TREE checkout
 fi
 
-git --git-dir=$GIT_DIR --work-tree=$WORK_TREE submodule update –init –recursive
+git --git-dir=$GIT_DIR --work-tree=$WORK_TREE submodule init
+git --git-dir=$GIT_DIR --work-tree=$WORK_TREE submodule update
 
 echo "Dotfiles repository successfully checked out."
 echo
