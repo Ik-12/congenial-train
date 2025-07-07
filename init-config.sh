@@ -41,6 +41,7 @@ git --git-dir=$GIT_DIR --work-tree=$WORK_TREE config --local status.showUntracke
 
 # Attempt to check out the content of the repository
 echo "Checking out dotfiles..."
+cd
 if ! git --git-dir=$GIT_DIR --work-tree=$WORK_TREE checkout; then
     echo "Conflict detected. Renaming existing files to '-bak'..."
 
