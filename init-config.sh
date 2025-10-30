@@ -1,21 +1,31 @@
 #!/bin/bash
 
-required_pkgs="git zsh vim bat"
+required_pkgs="git zsh vim bat eza tmux"
 
-if (($(apt list $required_pkgs 2>/dev/null | grep -c -v '\[installed\]') > 1)); then
+if (($SYSTEM == "Darwin")); then
+    if ! type brew commands &> /dev/null; then
+        echo "Installing Homebrew..."
+        /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    fi
+    
     echo "Installing missing packages..."
-    cmd="apt install -y $required_pkgs"
-
-    if (($EUID == 0)); then
-        apt update
-        $cmd
-    else
-        if type sudo 2> /dev/null; then
-            sudo apt update
-            sudo $cmd
+    brew install $required_pkgs
+else
+    if (($(apt list $required_pkgs 2>/dev/null | grep -c -v '\[installed\]') > 1)); then
+        echo "Installing missing packages..."
+        cmd="apt install -y $required_pkgs"
+    
+        if (($EUID == 0)); then
+            apt update
+            $cmd
         else
-            echo "Error: sudo is not installed. Install it or install the following required packages as root:"
-            echo "apt update &&" $cmd
+            if type sudo 2> /dev/null; then
+                sudo apt update
+                sudo $cmd
+            else
+                echo "Error: sudo is not installed. Install it or install the following required packages as root:"
+                echo "apt update &&" $cmd
+            fi
         fi
     fi
 fi
