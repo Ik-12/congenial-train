@@ -69,6 +69,8 @@ fi
 git --git-dir=$GIT_DIR --work-tree=$WORK_TREE submodule init
 git --git-dir=$GIT_DIR --work-tree=$WORK_TREE submodule update
 
+git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+
 echo "Dotfiles repository successfully checked out."
 echo
 echo "After testing zsh configuration works, change login shell using following command:"
