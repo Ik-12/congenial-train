@@ -49,6 +49,9 @@ WORK_TREE="$HOME"
 # Configure git to hide untracked files in this repository
 git --git-dir=$GIT_DIR --work-tree=$WORK_TREE config --local status.showUntrackedFiles no
 
+# Use post-merge hook to automatically update/install Vim Plugs
+git --git-dir=$GIT_DIR --work-tree=$WORK_TREE config --local core.hooksPath ~/.cfg-git-hooks
+
 # Attempt to check out the content of the repository
 echo "Checking out dotfiles..."
 cd
