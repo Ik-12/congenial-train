@@ -52,6 +52,9 @@ git --git-dir=$GIT_DIR --work-tree=$WORK_TREE config --local status.showUntracke
 # Use post-merge hook to automatically update/install Vim Plugs
 git --git-dir=$GIT_DIR --work-tree=$WORK_TREE config --local core.hooksPath ~/.cfg-git-hooks
 
+# Don't try to push changes to submodules (plugins etc.)
+git --git-dir=$GIT_DIR --work-tree=$WORK_TREE config --local submodule.recurse false
+
 # Attempt to check out the content of the repository
 echo "Checking out dotfiles..."
 cd
