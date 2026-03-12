@@ -2,7 +2,7 @@
 
 required_pkgs="git zsh vim bat eza tmux"
 
-if (($SYSTEM == "Darwin")); then
+if [[ $SYSTEM == "Darwin" ]]; then
     if ! type brew commands &> /dev/null; then
         echo "Installing Homebrew..."
         /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
