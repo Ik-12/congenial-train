@@ -11,3 +11,9 @@
 ```
 Crtl+space I
 ```
+
+Or:
+
+```
+~/.tmux/plugins/tpm/bin/install_plugins
+```
