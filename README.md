@@ -12,7 +12,7 @@
 Crtl+space I
 ```
 
-Or:
+Or (in shell):
 
 ```
 ~/.tmux/plugins/tpm/bin/install_plugins
