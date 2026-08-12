@@ -77,6 +77,12 @@ git --git-dir=$GIT_DIR --work-tree=$WORK_TREE submodule update
 
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
+echo "Installing tmux plugins..."
+~/.tmux/plugins/tpm/bin/install_plugins
+
+echo "Installing Vim plugins..."
+vim +PlugInstall +qall
+
 echo "Dotfiles repository successfully checked out."
 echo
 echo "After testing zsh configuration works, change login shell using following command:"
