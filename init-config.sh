@@ -1,6 +1,6 @@
 #!/bin/bash
 
-required_pkgs="git zsh vim bat eza tmux"
+required_pkgs="git zsh vim bat eza tmux tig lazygit"
 
 if [[ $SYSTEM == "Darwin" ]]; then
     if ! type brew commands &> /dev/null; then
