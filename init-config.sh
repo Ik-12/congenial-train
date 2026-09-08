@@ -11,6 +11,14 @@ if [[ $SYSTEM == "Darwin" ]]; then
     echo "Installing missing packages..."
     brew install $required_pkgs
 else
+    # Install Homebrew and newest version of Neovim
+    sudo mkdir -p /home/linuxbrew
+    sudo chown -R admin:admin /home/linuxbrew
+    cd /home/linuxbrew
+    curl -L https://github.com/Homebrew/brew/tarball/main | tar xz --strip 1 -C .linuxbrew
+    export PATH=$PATH:/home/linuxbrew/.linuxbrew/bin
+    brew install -y neovim
+
     if (($(apt list $required_pkgs 2>/dev/null | grep -c -v '\[installed\]') > 1)); then
         echo "Installing missing packages..."
         cmd="apt install -y $required_pkgs"
